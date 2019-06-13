@@ -1,0 +1,40 @@
+eureka:
+  client:
+    service-url:
+      defaultZone: http://root:root@192.168.220.117:7777/eureka
+  instance:
+    lease-renewal-interval-in-seconds: 2
+    lease-expiration-duration-in-seconds: 2
+    instance-id: ${spring.cloud.client.ipAddress}:${server.port}
+spring:
+  application:
+    name: dm-order-consumer
+  rabbitmq:
+      host: 192.168.220.117
+      port: 5672
+      username: guest
+      password: guest
+  redis:
+      database: 0
+      port: 6379
+      timeout: 0
+      password: 123456
+      host: 192.168.220.117
+      pool:
+        max-active: 8
+        max-idle: 8
+        min-idle: 0
+        max-wait: -1
+  datasource:
+    url: jdbc:mysql://192.168.220.117:3306/dm_order?useUnicode=true&characterEncoding=gbk&zeroDateTimeBehavior=convertToNull
+    username: root
+    password: root
+    driver-class-name: com.mysql.jdbc.Driver
+server:
+  port: 7021
+mybatis:
+  mapper-locations: classpath:mapper/*Mapper.xml
+feign:
+  hystrix:
+    enabled: false
+moduleName: order_consumer
